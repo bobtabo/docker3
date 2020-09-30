@@ -1,4 +1,5 @@
 FROM nginx:latest
+# RUN rm /etc/nginx/conf.d/default.conf
 
 # ユーザーを作成
 ARG DOCKER_UID=1000
@@ -9,7 +10,7 @@ ARG DOCKER_PASSWORD=docker
     && echo "docker    ALL=(ALL)       ALL" >> /etc/sudoers
 
 # 設定の置換
-COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
+# COPY conf.d/default.conf.template /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
 RUN chgrp -R docker /var/cache/nginx /var/run /var/log/nginx && \

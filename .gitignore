@@ -3,3 +3,4 @@
 /db
 /src/*
 !/src/laravel
+.env

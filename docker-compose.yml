@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 volumes:
     phpsocket:
@@ -7,11 +7,12 @@ services:
   nginx:
     container_name: nginx
     environment:
-      - APP_NAME=${APP_NAME:-laravel}
+      - APP_NAME=${APP_NAME}
     build: ./nginx
     ports:
       - '80:80'
     volumes:
+      - ./nginx/conf.d:/etc/nginx/templates
       - ./src:/home/docker
       - phpsocket:/var/run
     depends_on:
@@ -21,7 +22,7 @@ services:
     container_name: php
     build: ./php
     ports:
-      - '9000:9000'
+      - '${XDEBUG_PORT}:9000'
     volumes:
       - ./src:/home/docker
       - phpsocket:/var/run
@@ -29,13 +30,13 @@ services:
       - db
 
   db:
-    image: mysql:5.7
+    image: mysql:8
     container_name: mysql
     environment:
-      MYSQL_DATABASE: hoge
-      MYSQL_USER: fuga
-      MYSQL_PASSWORD: docker#DOCKER1234
-      MYSQL_ROOT_PASSWORD: docker#DOCKER1234
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     ports:
       - "3306:3306"

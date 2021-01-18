@@ -1,10 +1,11 @@
-FROM php:7.1-fpm
+FROM php:7.4-fpm
 
 # ライブラリのインストール
 RUN apt-get update
 RUN apt-get install -y \
       sudo \
       libpq-dev \
+      libonig-dev \
       git \
       zip \
       unzip \
@@ -16,7 +17,7 @@ RUN docker-php-ext-install \
       pdo_mysql
 
 # Xdebugのインストール
-RUN pecl install xdebug
+RUN pecl install xdebug-2.9.8
 RUN docker-php-ext-enable xdebug
 
 # Composerのインストール

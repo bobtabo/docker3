@@ -7,9 +7,6 @@ services:
   nginx:
     container_name: nginx
     build: ./nginx
-        # context: ./nginx
-        # args:
-        #   APP_NAME: ${APP_NAME}
     ports:
       - '80:80'
     volumes:

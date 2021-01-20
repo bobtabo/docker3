@@ -1,8 +1,4 @@
 FROM nginx:latest
-# RUN rm /etc/nginx/conf.d/default.conf
-
-# ARG APP_NAME
-# ENV APP_NAME = $APP_NAME
 
 # ユーザーを作成
 ARG DOCKER_UID=1000

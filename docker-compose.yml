@@ -6,10 +6,10 @@ volumes:
 services:
   nginx:
     container_name: nginx
-    build:
-        context: ./nginx
-        args:
-          APP_NAME: ${APP_NAME}
+    build: ./nginx
+        # context: ./nginx
+        # args:
+        #   APP_NAME: ${APP_NAME}
     ports:
       - '80:80'
     volumes:
@@ -18,9 +18,8 @@ services:
       - phpsocket:/var/run
     depends_on:
       - php
-    # environment:
-    #   - APP_NAME=${APP_NAME}
-    # command: /bin/sh -c "envsubst /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf"
+    environment:
+      - APP_NAME=${APP_NAME}
 
   php:
     container_name: php

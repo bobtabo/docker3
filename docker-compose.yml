@@ -12,7 +12,6 @@ services:
     volumes:
       - ./nginx/templates:/etc/nginx/templates
       - ./src/${APP_NAME}:/var/www/html
-      - ./src:/home/docker
       - phpsocket:/var/run
     depends_on:
       - php
@@ -25,7 +24,6 @@ services:
     ports:
       - '${XDEBUG_PORT}:9000'
     volumes:
-      - ./src/${APP_NAME}:/var/www/html
       - ./src:/home/docker
       - phpsocket:/var/run
     depends_on:

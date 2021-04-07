@@ -22,7 +22,7 @@ services:
     container_name: php
     build: ./php
     ports:
-      - '${XDEBUG_PORT}:9000'
+      - '${XDEBUG_PORT}:9001'
     volumes:
       - ./src:/home/docker
       - phpsocket:/var/run
